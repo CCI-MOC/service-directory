@@ -19,8 +19,8 @@ from sqlalchemy.orm import relationship, sessionmaker,backref
 from passlib.hash import sha512_crypt
 from subprocess import call, check_call
 import subprocess
-from haas.config import cfg
-from haas.dev_support import no_dry_run
+from sd.config import cfg
+from sd.dev_support import no_dry_run
 import importlib
 import uuid
 import xml.etree.ElementTree
@@ -47,17 +47,11 @@ def init_db(create=False, uri=None):
     if uri == None:
         uri = cfg.get('database', 'uri')
 
-    # We have to import this prior to doing create_all, so that any tables
-    # defined by the driver will make it into the schema.
-    driver_name = cfg.get('general', 'driver')
-    driver = importlib.import_module('haas.drivers.' + driver_name)
-
     engine = create_engine(uri)
     if create:
         Base.metadata.create_all(engine)
     Session.configure(bind=engine)
 
-    driver.init_db(create=create)
 
 
 class Model(Base):

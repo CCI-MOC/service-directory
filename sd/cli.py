@@ -13,8 +13,8 @@
 # governing permissions and limitations under the License.
 
 """This module implements the HaaS command line tool."""
-from haas import config
-from haas.config import cfg
+from sd import config
+from sd.config import cfg
 
 import logging
 import inspect
@@ -81,7 +81,7 @@ def serve():
         debug = False
     # We need to import api here so that the functions within it get registered
     # (via `rest_call`), though we don't use it directly:
-    from haas import model, http, api
+    from sd import model, http, api
     model.init_db()
     http.serve(debug=debug)
 
@@ -134,7 +134,7 @@ def help(*commands):
 def main():
     """Entry point to the CLI.
 
-    There is a script located at ${source_tree}/scripts/haas, which invokes
+    There is a script located at ${source_tree}/scripts/sd, which invokes
     this function.
     """
     config.load()

@@ -20,9 +20,9 @@ import importlib
 import json
 import logging
 
-from haas import model
-from haas.config import cfg
-from haas.http import APIError, rest_call
+from sd import model
+from sd.config import cfg
+from sd.http import APIError, rest_call
 
 
 class NotFoundError(APIError):
